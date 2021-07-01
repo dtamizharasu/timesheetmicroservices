@@ -1,18 +1,24 @@
 package com.timesheet.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Date;
+import java.sql.Date;
 
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Timesheet {
 
     @Id
-    private Integer id;
+    @GeneratedValue
+    private Integer timesheetId;
     // User inputs from post method
     private Integer employeeId;
     private Integer projectId;
@@ -21,5 +27,5 @@ public class Timesheet {
     private String category;
     private String billable;
     private Date taskDate;
-    private String leave;
+    private String leaves;
 }
