@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.sql.Date;
 
 
 @Entity
@@ -24,8 +23,8 @@ public class Timesheet {
     private Integer projectId;
     private Integer contributionHrs;
     private String projectName;
-    private String category;
+    private String category; // Contain constant values [Remote,Onshore,Offshore,Leave]
     private String billable;
-    private Date taskDate;
+    private String taskDate;
     private String leaves;
 }
