@@ -29,7 +29,7 @@ public class TimesheetService {
     public String addHrs(Timesheet timesheet){
         String message = "";
         ResponseEntity<int[]> response =
-                restTemplate.getForEntity("http://localhost:8083/api/allocation/projectIds/"+timesheet.getEmployeeId(),int[].class);
+                restTemplate.getForEntity("http://Allocation-Service/api/allocation/projectIds/"+timesheet.getEmployeeId(),int[].class);
         int[] projIds = response.getBody();
         List<Integer> ids = Arrays.stream(projIds).boxed().collect(Collectors.toList());
         if(ids.contains(timesheet.getProjectId())){
@@ -83,12 +83,12 @@ public class TimesheetService {
         List<String> projectNameList =  new ArrayList<>();
 
         ResponseEntity<int[]> response =
-                restTemplate.getForEntity("http://localhost:8083/api/allocation/projectIds/"+empId,int[].class);
+                restTemplate.getForEntity("http://Allocation-Service/api/allocation/projectIds/"+empId,int[].class);
         int[] projIds = response.getBody();
         if(projIds!=null){
             for(int ids: projIds){
                 Project project =
-                        restTemplate.getForObject("http://localhost:8082/api/project/"+ids,Project.class);
+                        restTemplate.getForObject("http://Project-Service/api/project/"+ids,Project.class);
                 projectIdList.add(ids);
                     assert project != null;
                     projectNameList.add(project.getProjectName());
