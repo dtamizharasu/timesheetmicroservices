@@ -1,9 +1,9 @@
 server:
   port: 8084
 
-#spring:
-#  application:
-#    name : Timesheet-Service
+spring:
+  application:
+    name : Timesheet-Service
 
 # Enable when no separate Config server
 #eureka:

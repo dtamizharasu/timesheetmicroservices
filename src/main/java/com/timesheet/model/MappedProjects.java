@@ -15,6 +15,4 @@ public class MappedProjects {
     private List<Integer> projectId;
     private List<String> projectName;
     private List<String> category;
-    private Integer contributionHrs;
-    private String taskDate;
 }

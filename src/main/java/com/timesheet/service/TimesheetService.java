@@ -9,10 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +25,7 @@ public class TimesheetService {
 
 
     public String addHrs(Timesheet timesheet){
-        String message = "";
+        String message = "Hours Has been locked successfully";
         ResponseEntity<int[]> response =
                 restTemplate.getForEntity("http://Allocation-Service/api/allocation/projectIds/"+timesheet.getEmployeeId(),int[].class);
         int[] projIds = response.getBody();
@@ -56,7 +54,7 @@ public class TimesheetService {
         return message;
     }
 
-    public List<Timesheet> getAllProjectDetailsByEmpId(Integer employeeId, String startDate, String endDate) throws ParseException {
+    public List<Timesheet> getAllProjectDetailsByEmpId(Integer employeeId, String startDate, String endDate){
         List<Timesheet> timesheetList;
 //        List<Timesheet> projectHrsList = new ArrayList<>();
         // Formatting the String into Date
@@ -98,8 +96,6 @@ public class TimesheetService {
         mappedProjects.setProjectId(projectIdList);
         mappedProjects.setProjectName(projectNameList);
         mappedProjects.setCategory(Arrays.asList("Training","Remote","OffShore","OnShore","Leaves"));
-        mappedProjects.setContributionHrs(0);
-        mappedProjects.setTaskDate(String.valueOf(new Date()));
 
     return mappedProjects;
     }
