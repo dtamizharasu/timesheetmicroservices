@@ -27,14 +27,14 @@ public class TimesheetService {
     public String addHrs(Timesheet timesheet){
         String message = "Hours Has been locked successfully";
         ResponseEntity<int[]> response =
-                restTemplate.getForEntity("http://Allocation-Service/api/allocation/projectIds/"+timesheet.getEmployeeId(),int[].class);
+                restTemplate.getForEntity("http://ALLOCATION-SERVICE/api/allocation/projectIds/"+timesheet.getEmployeeId(),int[].class);
         int[] projIds = response.getBody();
         List<Integer> ids = Arrays.stream(projIds).boxed().collect(Collectors.toList());
         if(ids.contains(timesheet.getProjectId())){
             List<Timesheet> exitsEntry = repo.getEmployeeByIdAndDate(timesheet.getEmployeeId(),timesheet.getTaskDate());
             int overAllHrs = exitsEntry.stream().mapToInt(Timesheet::getContributionHrs).sum();
             int remainingHrs = 8 - overAllHrs;
-            if(timesheet.getContributionHrs() < 8){
+            if(timesheet.getContributionHrs() <=8){
                 if(remainingHrs == 0){
                     message = "Per Day Hours Limit is 8 and available limit is :"+remainingHrs;
                 }else if(remainingHrs !=0  && timesheet.getContributionHrs() <= remainingHrs){
@@ -46,7 +46,7 @@ public class TimesheetService {
             }else{
                 message = "Per Day Hours Limit is 8 and entered Hour is :"+timesheet.getContributionHrs()+" will not accepted";
             }
-            repo.save(timesheet);
+            //repo.save(timesheet);
         }else{
             message = "Given Project Id You Are not Mapped Please Provide Valid ID";
         }
